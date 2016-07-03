@@ -36,4 +36,9 @@ public class MainListAdapter extends MultiTypeListAdapter<RespData.ResultsBean> 
     public int getItemCount() {
         return beanList == null ? 0 : beanList.size();
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
 }

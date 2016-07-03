@@ -1,12 +1,16 @@
 package jhw.pretty.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by jihongwen on 16/6/30.
  */
 
-public class RespData {
+public class RespData implements Parcelable {
 
     /**
      * error : false
@@ -28,7 +32,7 @@ public class RespData {
 
     public List<ResultsBean> results;
 
-    public static class ResultsBean {
+    public static class ResultsBean implements Parcelable {
         public String _id;
         public String createdAt;
         public String desc;
@@ -39,5 +43,84 @@ public class RespData {
         public String url;
         public boolean used;
         public String who;
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this._id);
+            dest.writeString(this.createdAt);
+            dest.writeString(this.desc);
+            dest.writeString(this.publishedAt);
+            dest.writeString(this.content);
+            dest.writeString(this.source);
+            dest.writeString(this.type);
+            dest.writeString(this.url);
+            dest.writeByte(this.used ? (byte) 1 : (byte) 0);
+            dest.writeString(this.who);
+        }
+
+        public ResultsBean() {
+        }
+
+        protected ResultsBean(Parcel in) {
+            this._id = in.readString();
+            this.createdAt = in.readString();
+            this.desc = in.readString();
+            this.publishedAt = in.readString();
+            this.content = in.readString();
+            this.source = in.readString();
+            this.type = in.readString();
+            this.url = in.readString();
+            this.used = in.readByte() != 0;
+            this.who = in.readString();
+        }
+
+        public static final Creator<ResultsBean> CREATOR = new Creator<ResultsBean>() {
+            @Override
+            public ResultsBean createFromParcel(Parcel source) {
+                return new ResultsBean(source);
+            }
+
+            @Override
+            public ResultsBean[] newArray(int size) {
+                return new ResultsBean[size];
+            }
+        };
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte(this.error ? (byte) 1 : (byte) 0);
+        dest.writeList(this.results);
+    }
+
+    public RespData() {
+    }
+
+    protected RespData(Parcel in) {
+        this.error = in.readByte() != 0;
+        this.results = new ArrayList<ResultsBean>();
+        in.readList(this.results, ResultsBean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<RespData> CREATOR = new Parcelable.Creator<RespData>() {
+        @Override
+        public RespData createFromParcel(Parcel source) {
+            return new RespData(source);
+        }
+
+        @Override
+        public RespData[] newArray(int size) {
+            return new RespData[size];
+        }
+    };
 }
