@@ -85,13 +85,13 @@ public class GankApiService implements GankApi {
     }
 
     @Override
-    public Observable<RespData> data(@Path("platform") String platform, @Path("count") String count, @Path("page") String page) {
-        return getApi().data(platform, count, page).compose(this.getTransformer());
+    public Observable<RespData> data(@Path("type") String type, @Path("count") String count, @Path("page") String page) {
+        return getApi().data(type, count, page).compose(this.getTransformer());
     }
 
     @Override
-    public Observable<RespData> search(@Path("platform") String platform, @Path("count") String count, @Path("page") String page) {
-        return getApi().search(platform, count, page).compose(this.getTransformer());
+    public Observable<RespData> search(@Path("type") String type, @Path("count") String count, @Path("page") String page) {
+        return getApi().search(type, count, page).compose(this.getTransformer());
     }
 
     @Override

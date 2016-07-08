@@ -14,11 +14,17 @@ public interface GankApi {
 
     String HOST = "http://gank.io/api/";
 
-    @GET("data/{platform}/{count}/{page}")
-    Observable<RespData> data(@Path("platform") String platform, @Path("count") String count, @Path("page") String page);
+    /**
+     * @param type  Android 福利 IOS all
+     * @param count
+     * @param page
+     * @return
+     */
+    @GET("data/{type}/{count}/{page}")
+    Observable<RespData> data(@Path("type") String type, @Path("count") String count, @Path("page") String page);
 
-    @GET("search/query/listview/category/{platform}/count/{count}/page/{page}")
-    Observable<RespData> search(@Path("platform") String platform, @Path("count") String count, @Path("page") String page);
+    @GET("search/query/listview/category/{type}/count/{count}/page/{page}")
+    Observable<RespData> search(@Path("type") String type, @Path("count") String count, @Path("page") String page);
 
     @GET("history/content/{count}/{page}")
     Observable<RespData> historyContent(@Path("count") String count, @Path("page") String page);
