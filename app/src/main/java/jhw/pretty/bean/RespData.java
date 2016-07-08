@@ -43,6 +43,12 @@ public class RespData implements Parcelable {
         public String url;
         public boolean used;
         public String who;
+        public String imageUrl;
+
+        public transient ResultsBean imageBean;
+
+        public ResultsBean() {
+        }
 
         @Override
         public int describeContents() {
@@ -61,9 +67,7 @@ public class RespData implements Parcelable {
             dest.writeString(this.url);
             dest.writeByte(this.used ? (byte) 1 : (byte) 0);
             dest.writeString(this.who);
-        }
-
-        public ResultsBean() {
+            dest.writeString(this.imageUrl);
         }
 
         protected ResultsBean(Parcel in) {
@@ -77,6 +81,7 @@ public class RespData implements Parcelable {
             this.url = in.readString();
             this.used = in.readByte() != 0;
             this.who = in.readString();
+            this.imageUrl = in.readString();
         }
 
         public static final Creator<ResultsBean> CREATOR = new Creator<ResultsBean>() {

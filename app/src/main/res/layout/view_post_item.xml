@@ -11,7 +11,7 @@
     android:orientation="vertical"
     card_view:cardCornerRadius="4dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -22,6 +22,27 @@
             android:layout_height="250dp"
             android:scaleType="centerCrop"
             android:transitionName="@string/transition_image" />
-    </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="#60ffffff">
+
+            <jhw.pretty.widget.SecretTextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:lineSpacingExtra="3dp"
+                android:maxLines="4"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>
